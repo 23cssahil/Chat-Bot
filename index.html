@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Protected Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #content {
+            display: none; /* Content is hidden initially */
+        }
+        #passwordPrompt {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #passwordInput {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+        }
+        #btn{
+            margin-top: 5px ;
+            border-radius: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Password Prompt Section -->
+    <div class="chat-container" id="passwordPrompt">
+        <h3>Please Enter The Password To Access This Page</h3>
+        <p><p style="color:rgb(235,27,15)"><b>The Password For This Session Is</b></p> %^Sk87YJz:<span id="generatedPassword"></span>$87yJfZ</p>
+        <input type="password" id="passwordInput" placeholder="Enter password...">
+        <button id="btn" onclick="checkPassword()">Submit</button>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure saepe voluptatibus suscipit nam eos deserunt nisi velit qui eius ducimus quam maiores illo quibusdam blanditiis, veritatis optio. Exercitationem, sit dolor laborum laboriosam incidunt porro reprehenderit nihil eaque provident debitis molestias, harum nesciunt voluptatibus deleniti aut quae ullam voluptates nisi in?</p>
+    </div>
+
+    <!-- Content that will be shown after successful password entry -->
+    <div id="content">
+        <div class="chat-container">
+            <div class="chat-window" id="chat-window"></div>
+            <h2 style="font-size: 22px;"><center>Developed By Sahil Khan</h2>
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to generate a random password
+        function generateRandomPassword(length = 8) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                password += characters[randomIndex];
+            }
+            return password;
+        }
+
+        // Generate a random password and display it
+        const randomPassword = generateRandomPassword(12); // 12 character password
+        document.getElementById('generatedPassword').textContent = randomPassword;
+
+        // Function to check the entered password
+        function checkPassword() {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            if (enteredPassword === randomPassword) {
+                // Hide the password prompt and show the content
+                document.getElementById('passwordPrompt').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                // If the password is incorrect, alert the user
+                alert('Incorrect password. Please try again.');
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
